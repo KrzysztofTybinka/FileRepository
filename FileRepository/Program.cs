@@ -1,4 +1,7 @@
 
+using DataAccess;
+using Microsoft.EntityFrameworkCore;
+
 namespace FileRepository
 {
     public class Program
@@ -13,6 +16,8 @@ namespace FileRepository
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<UserDbContext> (option =>
+                option.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
 
             var app = builder.Build();
 
